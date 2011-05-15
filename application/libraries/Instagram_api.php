@@ -73,7 +73,7 @@ class Instagram_api {
     	$this->codeigniter_instance =& get_instance();
     	
     	// Load the Instagram API language file
-    	$this->codeigniter_instance->lang->load('instagram_api');
+    	$this->codeigniter_instance->load->config('Instagram_api');
     
     } 
     
@@ -89,7 +89,7 @@ class Instagram_api {
      */
     function instagramLogin() {
     
-    	return 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->lang->line('client_id') . '&redirect_uri=' . $this->codeigniter_instance->lang->line('callback_url') . '&response_type=code';
+    	return 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id') . '&redirect_uri=' . $this->codeigniter_instance->config->item('instagram_callback_url') . '&response_type=code';
     
     }
     
@@ -139,7 +139,7 @@ class Instagram_api {
 	
 		$authorization_url = 'https://api.instagram.com/oauth/access_token';
 		
-		return $this->__apiCall($authorization_url, "client_id=" . $this->codeigniter_instance->lang->line('client_id') . "&client_secret=" . $this->codeigniter_instance->lang->line('client_secret') . "&grant_type=authorization_code&redirect_uri=" . $this->codeigniter_instance->lang->line('callback_url') . "&code=" . $code);		
+		return $this->__apiCall($authorization_url, "client_id=" . $this->codeigniter_instance->config->item('instagram_client_id') . "&client_secret=" . $this->codeigniter_instance->config->item('instagram_client_secret') . "&grant_type=authorization_code&redirect_uri=" . $this->codeigniter_instance->config->item('instagram_callback_url') . "&code=" . $code);		
 		
 	}
     
@@ -151,7 +151,7 @@ class Instagram_api {
     function getPopularMedia()
     {
         
-    	$popular_media_request_url = 'https://api.instagram.com/v1/media/popular?client_id=' . $this->codeigniter_instance->lang->line('client_id');
+    	$popular_media_request_url = 'https://api.instagram.com/v1/media/popular?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id');
     	
     	return $this->__apiCall($popular_media_request_url);
         

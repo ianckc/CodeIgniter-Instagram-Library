@@ -4,7 +4,7 @@ Clone the git repository and copy the files to your CodeIgniter application. The
 
 You will need to set up a new client with Instagram at http://instagram.com/developer/
 
-Once this is complete copy the details supplied by Instagram into system/language/YOU LANGUAGE/instagram_api_lang.php
+Once this is complete copy the details supplied by Instagram into application/config/Instagram_api_lang.php
 
 To use the library add $this->load->library('instagram_api'); to any class or function in your desired controller.
 
