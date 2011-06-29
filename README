@@ -21,3 +21,52 @@ Sample of the functions can be seen at
 http://ianluckraft.co.uk/demonstrations/instagram-library/welcome/
 
 I will release this application soon for download as a reference of how to use some of the functions.
+
+
+=== Function Reference
+
+This section of the README is a working list: more functions/features will be added/updated as soon as possible.
+In cases of the USERS endpoint of the Instagram API, where the passed variable is "$userid", you may substitute the string "self" to return the authenticated user's information
+
+Get basic information about a user:
+$igdata = $this->instagram_api->getUser($userid);
+
+Get a user's feed:
+$igdata = $this->instagram_api->getUserFeed($userid);
+
+Get a user's recent photos:
+$igdata = $this->instagram_api->getUserRecent($userid);
+
+Get a user's recent likes:
+$igdata = $this->instagram_api->getUserLikes($userid);
+
+Search for a user:
+$igdata = $this->instagram_api->userSearch($username);
+
+Get users a user follows:
+$igdata = $this->instagram_api->userFollows($userid);
+
+Get a user's followers:
+$igdata = $this->instagram_api->userFollowedBy($user_id);
+
+instagramLogin()
+authorize($code)
+getPopularMedia()
+userRequestedBy()
+userRelationship($user_id)
+modifyUserRelationship($user_id, $action)
+getMedia($media_id)
+mediaSearch($latitude = null, $longitude = null, $max_timestamp = null, $min_timestamp = null, $distance = null)
+popularMedia()
+mediaComments($media_id)
+postMediaComment($media_id)
+deleteMediaComment($media_id, $comment_id)
+mediaLikes($media_id)
+postLike($media_id)
+removeLike($media_id)
+getTags($tag)
+tagsRecent($tag, $max_id = null, $min_id = null)
+tagsSearch($tag)
+getLocation($location)
+locationRecent($location, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null)
+locationSearch($latitude = null, $longitude = null, $foursquare_id = null, $distance = null)

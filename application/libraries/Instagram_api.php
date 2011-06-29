@@ -37,15 +37,16 @@ class Instagram_api {
 	 * @var string
 	 */
     protected $api_urls = array(
-    	'user'						=> 'https://api.instagram.com/v1/users/%d/?access_token=%s',
+    	'user'						=> 'https://api.instagram.com/v1/users/%s/?access_token=%s',
         'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%d&min_id=%d',
-        'user_recent'				=> 'https://api.instagram.com/v1/users/%d/media/recent/?access_token=%s&max_id=%d&min_id=%d&max_timestamp=%d&min_timestamp=%d',
+        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&max_id=%d&min_id=%d&max_timestamp=%d&min_timestamp=%d',
+        'user_likes'				=> 'https://api.instagram.com/v1/users/%s/media/liked?access_token=%s',
         'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s',
-        'user_follows'				=> 'https://api.instagram.com/v1/users/%d/follows?access_token=%s',
-        'user_followed_by'			=> 'https://api.instagram.com/v1/users/%d/followed-by?access_token=%s',
+        'user_follows'				=> 'https://api.instagram.com/v1/users/%s/follows?access_token=%s',
+        'user_followed_by'			=> 'https://api.instagram.com/v1/users/%s/followed-by?access_token=%s',
         'user_requested_by'			=> 'https://api.instagram.com/v1/users/self/requested-by?access_token=%s',
-        'user_relationship'			=> 'https://api.instagram.com/v1/users/%d/relationship?access_token=%s',
-        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%d/relationship?action=%s&access_token=%s',
+        'user_relationship'			=> 'https://api.instagram.com/v1/users/%s/relationship?access_token=%s',
+        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%s/relationship?action=%s&access_token=%s',
         'media'						=> 'https://api.instagram.com/v1/media/%d?access_token=%s',
         'media_search'				=> 'https://api.instagram.com/v1/media/search?lat=%s&lng=%s&max_timestamp=%d&min_timestamp=%d&distance=%d&access_token=%s',
         'media_popular'				=> 'https://api.instagram.com/v1/media/popular?access_token=%s',
@@ -160,7 +161,7 @@ class Instagram_api {
     /*
      * Get an individual user's details
      * Accepts a user id
-     * @param int Instagram user id
+     * @param string Instagram user id (or "self")
      * @return std_class data about the Instagram user
      */
     function getUser($user_id) {
@@ -189,7 +190,7 @@ class Instagram_api {
     /*
      * Function to get a users recent published media
      * Accepts a user id and access token and optional max id, min id, max timestamp and min timestamp
-     * @param int Instagram user id
+     * @param string Instagram user id (or "self")
      * @param int return media after max id
      * @param int return media before min id
      * @param int return media after this UNIX timestamp
@@ -203,7 +204,21 @@ class Instagram_api {
     	return $this->__apiCall($user_recent_request_url);
     	
     }
-    
+
+    /*
+     * Function to get a users recent liked media
+     * Accepts a user id and access token (and technically accepts "max_like_id" and "count" but those aren't implemented yet)
+     * @param string Instagram user id (or "self")
+     * @return std_class of media found based on parameters given
+     */
+    function getUserLikes($user_id) {
+    	
+    	$user_likes_request_url = sprintf($this->api_urls['user_likes'], $user_id, $this->access_token);
+
+    	return $this->__apiCall($user_likes_request_url);
+    	
+    }
+
     /*
      * Function to search for user
      * Accepts a user name to search for
@@ -274,7 +289,7 @@ class Instagram_api {
     
 	/*
      * Function to modify the relationship between the current user and the target user
-     * @param int Instagram user id
+     * @param string Instagram user id (or "self")
      * @param string action to effect relatonship (follow/unfollow/block/unblock/approve/deny)
      * @return std_class result of request
      */
