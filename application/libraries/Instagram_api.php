@@ -90,7 +90,7 @@ class Instagram_api {
      */
     function instagramLogin() {
     
-    	return 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id') . '&redirect_uri=' . $this->codeigniter_instance->config->item('instagram_callback_url') . '&response_type=code';
+    	return 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id') . '&redirect_uri=' . $this->codeigniter_instance->config->item('instagram_redirect_uri') . '&response_type=code';
     
     }
     
@@ -140,7 +140,7 @@ class Instagram_api {
 	
 		$authorization_url = 'https://api.instagram.com/oauth/access_token';
 		
-		return $this->__apiCall($authorization_url, "client_id=" . $this->codeigniter_instance->config->item('instagram_client_id') . "&client_secret=" . $this->codeigniter_instance->config->item('instagram_client_secret') . "&grant_type=authorization_code&redirect_uri=" . $this->codeigniter_instance->config->item('instagram_callback_url') . "&code=" . $code);		
+		return $this->__apiCall($authorization_url, "client_id=" . $this->codeigniter_instance->config->item('instagram_client_id') . "&client_secret=" . $this->codeigniter_instance->config->item('instagram_client_secret') . "&grant_type=authorization_code&redirect_uri=" . $this->codeigniter_instance->config->item('instagram_redirect_uri') . "&code=" . $code);		
 		
 	}
     

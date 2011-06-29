@@ -1,72 +1,126 @@
-CodeIgniter library to interact with the Instagram API
+=== CodeIgniter Instagram Library
 
-Clone the git repository and copy the files to your CodeIgniter application. The library uses Jamie Rumbelow's MY_input.php class to allow ? in CodeIgniter URLs. For more information visit http://www.jamierumbelow.net and see the MY_Input.php file included in application/libraries
+This library provides a CodeIgniter application access to the Instagram API.
 
-You will need to set up a new client with Instagram at http://instagram.com/developer/
 
-Once this is complete copy the details supplied by Instagram into application/config/Instagram_api_lang.php
+=== Pre-requisites
 
-To use the library add $this->load->library('instagram_api'); to any class or function in your desired controller.
+* A functional CodeIgniter application
+* A registered client with Instagram - this can be completed at http://instagram.com/developer/
 
-All Instagram API functions, apart from getPopularMedia(), require an access token which Instagram supplies through OAuth.
 
-To set the access token in the Instagram API class use
+=== Configuration for Development
 
-$this->instagram_api->access_token = YOUR_ACCESS_TOKEN;
+* Copy the files within the application/libraries folder to the application/libraries folder in your CodeIgniter application
+* Copy the application/controllers/instagram.php file to the application/controllers folder in your CodeIgniter application
+* Enter your regsitered client details, supplied by Instagram, into this library's application/config/config.php file
+* Copy the contents of this library's application/config/config.php file into your CodeIgniter application's config.php file
+* Authorize your CodeIgniter application to use your Instagram account by using the provided Controller & entering the access token into the corresponding configuration variable
+* Add the following code to your Controller to load the library:
+$this->load->library('instagram_api');
+* Add the following line of code just below loading the library to set the access token:
+$this->instagram_api->access_token = $this->config->item('instagram_access_token');
+* Use the Function Reference section of this README (below) to make calls to the Instagram API
 
-after you have loaded the library.
 
-Sample of the functions can be seen at
+=== Notes
 
-http://ianluckraft.co.uk/demonstrations/instagram-library/welcome/
+The Controller provided in this library (and the explanation of Authorization, above) is only for authorizing your CodeIgniter application with your own account in order to allow easier development and testing.  You will need to create your own authorization methods for multi-user CodeIgniter applications.
 
-I will release this application soon for download as a reference of how to use some of the functions.
+This library uses Jamie Rumbelow's MY_input.php class to allow ? in CodeIgniter URLs. For more information visit http://www.jamierumbelow.net and see the MY_Input.php file included in application/libraries.
 
 
 === Function Reference
 
 This section of the README is a working list: more functions/features will be added/updated as soon as possible.
+A sample of the function results can be seen at http://ianluckraft.co.uk/demonstrations/instagram-library/welcome/
+
+All Instagram API functions, apart from getPopularMedia(), require an access token which Instagram supplies through OAuth.  This requirement is handled by obtaining the access token, and then setting "$this->instagram_api->access_token" after loading this library.
+
 In cases of the USERS endpoint of the Instagram API, where the passed variable is "$userid", you may substitute the string "self" to return the authenticated user's information
 
 Get basic information about a user:
-$igdata = $this->instagram_api->getUser($userid);
+$igdata = $this->instagram_api->getUser($user_id);
 
 Get a user's feed:
-$igdata = $this->instagram_api->getUserFeed($userid);
+$igdata = $this->instagram_api->getUserFeed($user_id);
 
 Get a user's recent photos:
-$igdata = $this->instagram_api->getUserRecent($userid);
+$igdata = $this->instagram_api->getUserRecent($user_id);
 
 Get a user's recent likes:
-$igdata = $this->instagram_api->getUserLikes($userid);
+$igdata = $this->instagram_api->getUserLikes($user_id);
 
 Search for a user:
 $igdata = $this->instagram_api->userSearch($username);
 
 Get users a user follows:
-$igdata = $this->instagram_api->userFollows($userid);
+$igdata = $this->instagram_api->userFollows($user_id);
 
 Get a user's followers:
 $igdata = $this->instagram_api->userFollowedBy($user_id);
 
-instagramLogin()
-authorize($code)
-getPopularMedia()
-userRequestedBy()
-userRelationship($user_id)
-modifyUserRelationship($user_id, $action)
-getMedia($media_id)
-mediaSearch($latitude = null, $longitude = null, $max_timestamp = null, $min_timestamp = null, $distance = null)
-popularMedia()
-mediaComments($media_id)
-postMediaComment($media_id)
-deleteMediaComment($media_id, $comment_id)
-mediaLikes($media_id)
-postLike($media_id)
-removeLike($media_id)
-getTags($tag)
-tagsRecent($tag, $max_id = null, $min_id = null)
-tagsSearch($tag)
-getLocation($location)
-locationRecent($location, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null)
-locationSearch($latitude = null, $longitude = null, $foursquare_id = null, $distance = null)
+- Still editing below this line-
+
+Log in to Instagram:
+$igdata = $this->instagram_api->instagramLogin();
+
+Authorize to Instagram:
+$igdata = $this->instagram_api->authorize($code);
+
+Get the latest popular photos:
+$igdata = $this->instagram_api->getPopularMedia();
+
+
+$igdata = $this->instagram_api->userRequestedBy();
+
+
+$igdata = $this->instagram_api->userRelationship($user_id);
+
+
+$igdata = $this->instagram_api->modifyUserRelationship($user_id, $action);
+
+
+$igdata = $this->instagram_api->getMedia($media_id);
+
+
+$igdata = $this->instagram_api->mediaSearch($latitude = null, $longitude = null, $max_timestamp = null, $min_timestamp = null, $distance = null);
+
+
+$igdata = $this->instagram_api->popularMedia();
+
+
+$igdata = $this->instagram_api->mediaComments($media_id);
+
+
+$igdata = $this->instagram_api->postMediaComment($media_id);
+
+
+$igdata = $this->instagram_api->deleteMediaComment($media_id, $comment_id);
+
+
+$igdata = $this->instagram_api->mediaLikes($media_id);
+
+
+$igdata = $this->instagram_api->postLike($media_id);
+
+
+$igdata = $this->instagram_api->removeLike($media_id);
+
+
+$igdata = $this->instagram_api->getTags($tag);
+
+
+$igdata = $this->instagram_api->tagsRecent($tag, $max_id = null, $min_id = null);
+
+
+$igdata = $this->instagram_api->tagsSearch($tag);
+
+
+$igdata = $this->instagram_api->getLocation($location);
+
+
+$igdata = $this->instagram_api->locationRecent($location, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null);
+
+
+$igdata = $this->instagram_api->locationSearch($latitude = null, $longitude = null, $foursquare_id = null, $distance = null);
