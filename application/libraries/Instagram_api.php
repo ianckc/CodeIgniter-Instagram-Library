@@ -73,8 +73,8 @@ class Instagram_api {
     	// Set the CodeIgniter instance variable
     	$this->codeigniter_instance =& get_instance();
     	
-    	// Load the Instagram API language file
-    	$this->codeigniter_instance->load->config('Instagram_api');
+    	// Load the configuration file
+    	$this->codeigniter_instance->load->config('config');
     
     } 
     
