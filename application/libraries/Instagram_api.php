@@ -37,15 +37,15 @@ class Instagram_api {
 	 * @var string
 	 */
     protected $api_urls = array(
-    	'user'						=> 'https://api.instagram.com/v1/users/%d/?access_token=%s',
+    	'user'						=> 'https://api.instagram.com/v1/users/%s/?access_token=%s',
         'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%d&min_id=%d',
-        'user_recent'				=> 'https://api.instagram.com/v1/users/%d/media/recent/?access_token=%s&max_id=%d&min_id=%d&max_timestamp=%d&min_timestamp=%d',
+        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&max_id=%d&min_id=%d&max_timestamp=%d&min_timestamp=%d',
         'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s',
-        'user_follows'				=> 'https://api.instagram.com/v1/users/%d/follows?access_token=%s',
-        'user_followed_by'			=> 'https://api.instagram.com/v1/users/%d/followed-by?access_token=%s',
+        'user_follows'				=> 'https://api.instagram.com/v1/users/%s/follows?access_token=%s',
+        'user_followed_by'			=> 'https://api.instagram.com/v1/users/%s/followed-by?access_token=%s',
         'user_requested_by'			=> 'https://api.instagram.com/v1/users/self/requested-by?access_token=%s',
-        'user_relationship'			=> 'https://api.instagram.com/v1/users/%d/relationship?access_token=%s',
-        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%d/relationship?action=%s&access_token=%s',
+        'user_relationship'			=> 'https://api.instagram.com/v1/users/%s/relationship?access_token=%s',
+        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%s/relationship?action=%s&access_token=%s',
         'media'						=> 'https://api.instagram.com/v1/media/%d?access_token=%s',
         'media_search'				=> 'https://api.instagram.com/v1/media/search?lat=%s&lng=%s&max_timestamp=%d&min_timestamp=%d&distance=%d&access_token=%s',
         'media_popular'				=> 'https://api.instagram.com/v1/media/popular?access_token=%s',
