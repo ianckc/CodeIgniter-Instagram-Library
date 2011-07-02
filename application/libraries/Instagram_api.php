@@ -38,10 +38,10 @@ class Instagram_api {
 	 */
     protected $api_urls = array(
     	'user'						=> 'https://api.instagram.com/v1/users/%s/?access_token=%s',
-        'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%d&min_id=%d',
-        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&max_id=%d&min_id=%d&max_timestamp=%d&min_timestamp=%d',
-        'user_likes'				=> 'https://api.instagram.com/v1/users/%s/media/liked?access_token=%s',
-        'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s',
+        'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%d&min_id=%d&count=%d',
+        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&max_id=%d&min_id=%d&count=%d&max_timestamp=%d&min_timestamp=%d',
+        'user_likes'				=> 'https://api.instagram.com/v1/users/%s/media/liked?access_token=%s&max_id=%d&count=%d',
+        'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s&count=%d',
         'user_follows'				=> 'https://api.instagram.com/v1/users/%s/follows?access_token=%s',
         'user_followed_by'			=> 'https://api.instagram.com/v1/users/%s/followed-by?access_token=%s',
         'user_requested_by'			=> 'https://api.instagram.com/v1/users/self/requested-by?access_token=%s',
@@ -166,14 +166,15 @@ class Instagram_api {
     
     /*
      * Get an individual user's feed
-     * Accepts optional max and min values
-     * @param int return media after max id
-     * @param int return media before min id
+     * Accepts optional max, min, and count values
+     * @param int Return media earlier than this max_id
+     * @param int Return media later than this min_id
+     * @param int Count of media to return
      * @return std_class of user's feed
      */
-    function getUserFeed($max = null, $min = null) {
+    function getUserFeed($max = null, $min = null, $count = null) {
     	
-    	$user_feed_request_url = sprintf($this->api_urls['user_feed'], $this->access_token, $max, $min);
+    	$user_feed_request_url = sprintf($this->api_urls['user_feed'], $this->access_token, $max, $min, $count);
     	
     	return $this->__apiCall($user_feed_request_url);
     	
@@ -181,17 +182,18 @@ class Instagram_api {
     
     /*
      * Function to get a users recent published media
-     * Accepts a user id and access token and optional max id, min id, max timestamp and min timestamp
+     * Accepts a user id and access token and optional max id, min id, count, max timestamp and min timestamp
      * @param string Instagram user id (or "self")
-     * @param int return media after max id
-     * @param int return media before min id
-     * @param int return media after this UNIX timestamp
-     * @param int return media before this UNIX timestamp
+     * @param int Return media earlier than this max_id
+     * @param int Return media later than this min_id
+     * @param int Count of media to return
+     * @param int Return media after this UNIX timestamp
+     * @param int Return media before this UNIX timestamp
      * @return std_class of media found based on parameters given
      */
-    function getUserRecent($user_id, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null) {
+    function getUserRecent($user_id, $max_id = null, $min_id = null, $count = null, $max_timestamp = null, $min_timestamp = null) {
     	
-    	$user_recent_request_url = sprintf($this->api_urls['user_recent'], $user_id, $this->access_token, $max_id, $min_id, $max_timestamp, $min_timestamp);
+    	$user_recent_request_url = sprintf($this->api_urls['user_recent'], $user_id, $this->access_token, $max_id, $min_id, $count, $max_timestamp, $min_timestamp);
     	
     	return $this->__apiCall($user_recent_request_url);
     	
@@ -201,25 +203,28 @@ class Instagram_api {
      * Function to get a users recent liked media
      * Accepts a user id and access token (and technically accepts "max_like_id" and "count" but those aren't implemented yet)
      * @param string Instagram user id (or "self")
+     * @param int Return media liked before this id
+     * @param int Count of media to return
      * @return std_class of media found based on parameters given
      */
-    function getUserLikes($user_id) {
-    	
-    	$user_likes_request_url = sprintf($this->api_urls['user_likes'], $user_id, $this->access_token);
+    function getUserLikes($user_id, $max_id = null, $count = null) {
+
+    	$user_likes_request_url = sprintf($this->api_urls['user_likes'], $user_id, $this->access_token, $max_id, $count);
 
     	return $this->__apiCall($user_likes_request_url);
     	
     }
 
     /*
-     * Function to search for user
-     * Accepts a user name to search for
-     * @param string an Instagram user name
+     * Function to Search for a user by name
+     * Accepts a query to search for
+     * @param string A query string
+     * @param int Number of users to return
      * @return std_class user data
      */
-    function userSearch($user_name) {
-    	
-    	$user_search_request_url = sprintf($this->api_urls['user_search'], $user_name, $this->access_token);
+    function userSearch($query, $count = null) {
+
+    	$user_search_request_url = sprintf($this->api_urls['user_search'], $query, $this->access_token, $count);
     	
     	return $this->__apiCall($user_search_request_url);
     	

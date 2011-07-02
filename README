@@ -54,21 +54,36 @@ Get basic information about a user:
 $this->instagram_api->getUser($user_id);
 * $user_id is either the ID of a user or "self" (with the quotes)
 
-Get a user's feed:
-$this->instagram_api->getUserFeed($user_id);
-* $user_id is either the ID of a user or "self" (with the quotes)
+See the authenticated user's feed:
+$this->instagram_api->getUserFeed($max, $min, $count);
+* $max (optional) Return media earlier than this max_id
+* $min (optional) Return media later than this min_id
+* $count (optional) Count of media to return
 
-Get a user's recent photos:
-$this->instagram_api->getUserRecent($user_id);
+Get the most recent media published by a user:
+$this->instagram_api->getUserRecent($user_id, $max_id, $min_id, $count, $max_timestamp, $min_timestamp);
 * $user_id is either the ID of a user or "self" (with the quotes)
+* $max (optional) Return media earlier than this max_id
+* $min (optional) Return media later than this min_id
+* $count (optional) Count of media to return
+* $max_timestamp (optional) Return media after this UNIX timestamp
+* $min_timestamp (optional) Return media before this UNIX timestamp
 
-Get a user's recent likes:
-$this->instagram_api->getUserLikes($user_id);
+See the authenticated user's list of media they've liked:
+$this->instagram_api->getUserLikes($user_id, $max_id, $count);
 * $user_id is either the ID of a user or "self" (with the quotes)
+* $max_id (optional) Return media liked before this id
+* $count (optional) Count of media to return
+* This list is ordered by the order in which the user liked the media
+* Private media is returned as long as the authenticated user has permission to view that media
+* Liked media lists are only available for the currently authenticated user.
 
-Search for a user:
-$this->instagram_api->userSearch($user_name);
-* $user_name is the name you are searching for
+Search for a user by name:
+$this->instagram_api->userSearch($query, $count);
+* $query A query string
+* $count (optional) Number of users to return
+
+--- Still editing below this line ---
 
 Get users a user follows:
 $this->instagram_api->userFollows($user_id);
@@ -77,8 +92,6 @@ $this->instagram_api->userFollows($user_id);
 Get a user's followers:
 $this->instagram_api->userFollowedBy($user_id);
 * $user_id is either the ID of a user or "self" (with the quotes)
-
---- Still editing below this line ---
 
 Produce the link required to authorize Instagram:
 $this->instagram_api->instagramLogin($ig_client_id, $ig_redirect_uri);
