@@ -1,0 +1,21 @@
+img, ul, li {
+	margin:0;
+	padding:0;
+	border:none;
+	list-style-type:none;
+}
+
+.image-list li {
+	float:left;
+	margin-right:10px;
+}
+
+footer {
+	display:block;
+	clear:left;
+}
+
+#map {
+	width:400px;
+	height:400px;
+}
