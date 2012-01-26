@@ -116,6 +116,11 @@ class Instagram_api {
 		    
 		// Return the curl results to a variable
 	    curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, 1);
+	    
+	    // There was issues with some servers not being able to retrieve the data through https
+	    // The config variable is set to TRUE by default. If you have this problem set the config variable to FALSE
+	    // See https://github.com/ianckc/CodeIgniter-Instagram-Library/issues/5 for a discussion on this
+	    curl_setopt($curl_session, CURLOPT_SSL_VERIFYPEER, $this->codeigniter_instance->config->item('instagram_ssl_verify'));
 		    
 	    // Execute the cURL session
 	    $contents = curl_exec ($curl_session);
