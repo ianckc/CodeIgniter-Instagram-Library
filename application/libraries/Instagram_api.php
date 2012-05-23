@@ -46,15 +46,15 @@ class Instagram_api {
         'user_requested_by'			=> 'https://api.instagram.com/v1/users/self/requested-by?access_token=%s',
         'user_relationship'			=> 'https://api.instagram.com/v1/users/%s/relationship?access_token=%s',
         'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%s/relationship?action=%s&access_token=%s',
-        'media'						=> 'https://api.instagram.com/v1/media/%d?access_token=%s',
+        'media'						=> 'https://api.instagram.com/v1/media/%s?access_token=%s',
         'media_search'				=> 'https://api.instagram.com/v1/media/search?lat=%s&lng=%s&max_timestamp=%s&min_timestamp=%s&distance=%s&access_token=%s',
         'media_popular'				=> 'https://api.instagram.com/v1/media/popular?access_token=%s',
-        'media_comments'			=> 'https://api.instagram.com/v1/media/%d/comments?access_token=%s',
-        'post_media_comment'		=> 'https://api.instagram.com/v1/media/%d/comments?access_token=%s',
-        'delete_media_comment'		=> 'https://api.instagram.com/v1/media/%d/comments?comment_id=%s&access_token=%s',
-        'likes'						=> 'https://api.instagram.com/v1/media/%d/likes?access_token=%s',
-    	'post_like'					=> 'https://api.instagram.com/v1/media/%d/likes?access_token=%s',
-        'remove_like'				=> 'https://api.instagram.com/v1/media/%d/likes?access_token=%s',
+        'media_comments'			=> 'https://api.instagram.com/v1/media/%s/comments?access_token=%s',
+        'post_media_comment'		=> 'https://api.instagram.com/v1/media/%s/comments?access_token=%s',
+        'delete_media_comment'		=> 'https://api.instagram.com/v1/media/%s/comments?comment_id=%s&access_token=%s',
+        'likes'						=> 'https://api.instagram.com/v1/media/%s/likes?access_token=%s',
+    	'post_like'					=> 'https://api.instagram.com/v1/media/%s/likes?access_token=%s',
+        'remove_like'				=> 'https://api.instagram.com/v1/media/%s/likes?access_token=%s',
         'tags'						=> 'https://api.instagram.com/v1/tags/%s?access_token=%s',
         'tags_recent'				=> 'https://api.instagram.com/v1/tags/%s/media/recent?max_id=%s&min_id=%s&access_token=%s',
         'tags_search'				=> 'https://api.instagram.com/v1/tags/search?q=%s&access_token=%s',
@@ -399,7 +399,7 @@ class Instagram_api {
     
         $post_media_like_request_url = sprintf($this->api_urls['post_like'], $media_id, $this->access_token);
     	
-    	return $this->__apiCall($post_media_like_request_url);
+    	return $this->__apiCall($post_media_like_request_url, TRUE);
     
     }
 
