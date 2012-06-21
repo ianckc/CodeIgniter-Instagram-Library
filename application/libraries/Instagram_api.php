@@ -351,15 +351,14 @@ class Instagram_api {
     /*
      * Function to post a media comment
      * @param int media id
+     * @param string comment on the media
      * @return std_class response to request
      */
-    function postMediaComment($media_id) {
+    function postMediaComment($media_id, $comment) {
     
-    	/********* NEED TO LOOK INTO THIS FURTHER *************/
-    
-    	/*$post_media_comment_url = sprintf($this->api_urls['post_media_comment'], $media_id, $this->access_token);
+    	$post_media_comment_url = sprintf($this->api_urls['post_media_comment'], $media_id, $this->access_token);
     	
-    	return $this->__apiCall($post_media_comment_url);*/    	
+    	return $this->__apiCall($post_media_comment_url, array('text' => $comment));    	
     
     }
     
