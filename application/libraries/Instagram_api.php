@@ -39,7 +39,7 @@ class Instagram_api {
     protected $api_urls = array(
     	'user'						=> 'https://api.instagram.com/v1/users/%s/?access_token=%s',
         'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%s&min_id=%s',
-        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&max_id=%s&min_id=%s&max_timestamp=%s&min_timestamp=%s',
+        'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&count=%s&max_id=%s&min_id=%s&max_timestamp=%s&min_timestamp=%s',
         'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s',
         'user_follows'				=> 'https://api.instagram.com/v1/users/%s/follows?access_token=%s',
         'user_followed_by'			=> 'https://api.instagram.com/v1/users/%s/followed-by?access_token=%s',
@@ -199,11 +199,12 @@ class Instagram_api {
      * @param int return media before min id
      * @param int return media after this UNIX timestamp
      * @param int return media before this UNIX timestamp
+     * @param int return this number of media
      * @return std_class of media found based on parameters given
      */
-    function getUserRecent($user_id, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null) {
+    function getUserRecent($user_id, $max_id = null, $min_id = null, $max_timestamp = null, $min_timestamp = null, $count = null) {
     	
-    	$user_recent_request_url = sprintf($this->api_urls['user_recent'], $user_id, $this->access_token, $max_id, $min_id, $max_timestamp, $min_timestamp);
+    	$user_recent_request_url = sprintf($this->api_urls['user_recent'], $user_id, $this->access_token, $count, $max_id, $min_id, $max_timestamp, $min_timestamp);
     	
     	return $this->__apiCall($user_recent_request_url);
     	
