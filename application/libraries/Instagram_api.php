@@ -45,7 +45,7 @@ class Instagram_api {
         'user_followed_by'			=> 'https://api.instagram.com/v1/users/%s/followed-by?access_token=%s',
         'user_requested_by'			=> 'https://api.instagram.com/v1/users/self/requested-by?access_token=%s',
         'user_relationship'			=> 'https://api.instagram.com/v1/users/%s/relationship?access_token=%s',
-        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%s/relationship?action=%s&access_token=%s',
+        'modify_user_relationship'	=> 'https://api.instagram.com/v1/users/%s/relationship?access_token=%s',
         'media'						=> 'https://api.instagram.com/v1/media/%s?access_token=%s',
         'media_search'				=> 'https://api.instagram.com/v1/media/search?lat=%s&lng=%s&max_timestamp=%s&min_timestamp=%s&distance=%s&access_token=%s',
         'media_popular'				=> 'https://api.instagram.com/v1/media/popular?access_token=%s',
@@ -286,9 +286,9 @@ class Instagram_api {
      */
     function modifyUserRelationship($user_id, $action) {
     	
-    	$user_modify_relationship_request_url = sprintf($this->api_urls['modify_user_relationship'], $user_id, $action, $this->access_token);
+    	$user_modify_relationship_request_url = sprintf($this->api_urls['modify_user_relationship'], $user_id, $this->access_token);
     	
-    	return $this->__apiCall($user_modify_relationship_request_url);
+    	return $this->__apiCall($user_modify_relationship_request_url, array("action" => $action));
     	
     }
     
