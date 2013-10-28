@@ -38,7 +38,7 @@ class Instagram_api {
 	 */
     protected $api_urls = array(
     	'user'						=> 'https://api.instagram.com/v1/users/%s/?access_token=%s',
-        'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&max_id=%s&min_id=%s',
+        'user_feed'					=> 'https://api.instagram.com/v1/users/self/feed?access_token=%s&count=%s&femax_id=%s&min_id=%s',
         'user_recent'				=> 'https://api.instagram.com/v1/users/%s/media/recent/?access_token=%s&count=%s&max_id=%s&min_id=%s&max_timestamp=%s&min_timestamp=%s',
         'user_search'				=> 'https://api.instagram.com/v1/users/search?q=%s&access_token=%s',
         'user_follows'				=> 'https://api.instagram.com/v1/users/%s/follows?access_token=%s',
@@ -183,9 +183,9 @@ class Instagram_api {
      * @param int return media before min id
      * @return std_class of user's feed
      */
-    function getUserFeed($max = null, $min = null) {
+    function getUserFeed($count = null, $max = null, $min = null) {
     	
-    	$user_feed_request_url = sprintf($this->api_urls['user_feed'], $this->access_token, $max, $min);
+    	$user_feed_request_url = sprintf($this->api_urls['user_feed'], $this->access_token, $count, $max, $min);
     	
     	return $this->__apiCall($user_feed_request_url);
     	
