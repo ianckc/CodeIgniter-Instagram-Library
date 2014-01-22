@@ -88,8 +88,13 @@ class Instagram_api {
      * @return string Instagram login url
      */
     function instagramLogin() {
+      
+      $login_url = 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id');
+      $login_url .= '&redirect_uri=' . $this->codeigniter_instance->config->item('instagram_callback_url');
+      $login_url .= '&response_type=code';
+      $login_url .= '&scope=' . $this->codeigniter_instance->config->item('instagram_scope');
     
-    	return 'https://api.instagram.com/oauth/authorize/?client_id=' . $this->codeigniter_instance->config->item('instagram_client_id') . '&redirect_uri=' . $this->codeigniter_instance->config->item('instagram_callback_url') . '&response_type=code';
+    	return $login_url;
     
     }
     
