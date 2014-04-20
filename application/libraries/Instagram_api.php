@@ -60,7 +60,8 @@ class Instagram_api {
         'tags_search'				=> 'https://api.instagram.com/v1/tags/search?q=%s&access_token=%s',
         'locations'					=> 'https://api.instagram.com/v1/locations/%d?access_token=%s',
         'locations_recent'			=> 'https://api.instagram.com/v1/locations/%d/media/recent/?max_id=%s&min_id=%s&max_timestamp=%s&min_timestamp=%s&access_token=%s',
-        'locations_search'			=> 'https://api.instagram.com/v1/locations/search?lat=%s&lng=%s&foursquare_id=%s&distance=%s&access_token=%s'
+        'locations_search'			=> 'https://api.instagram.com/v1/locations/search?lat=%s&lng=%s&foursquare_id=%s&distance=%s&access_token=%s',
+		'geographies' 				=> 'https://api.instagram.com/v1/geographies/%s/media/recent?client_id=%s'
     );
     
     /*
@@ -507,5 +508,18 @@ class Instagram_api {
     	return $this->__apiCall($location_search_request_url);
     
     }
+	
+    /*
+     * Get recent media from a geography subscription that was created
+     * @param string geography code returned when subscribing to a specific location
+     * @param string client id provided by instagram api
+     * @return std_class media posts of a specific geography
+     */	
+	function geographies($geo_code,$client_id)
+	{
+		$geographies_media_specific = sprintf($this->api_urls['geographies'],$geo_code,$client_id);
+		
+    	return $this->__apiCall($geographies_media_specific);
+	}	
 
 }
