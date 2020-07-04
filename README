@@ -1,3 +1,7 @@
+No Longer Maintained
+
+As the Instagram API has been stopped this library is no longer maintained.
+
 CodeIgniter library to interact with the Instagram API
 
 Clone the git repository and copy the files to your CodeIgniter application. The library uses Jamie Rumbelow's MY_input.php class to allow ? in CodeIgniter URLs. For more information visit http://www.jamierumbelow.net and see the MY_Input.php file included in application/libraries
